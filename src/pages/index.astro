@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import CurrencyConverter from '../components/CurrencyConverter.astro';
+import ExchangeRatesTable from '../components/ExchangeRatesTable.astro';
+import About from '../components/About.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Header />
+  
+  <main class="container">
+    <section id="converter" class="section">
+      <CurrencyConverter />
+    </section>
+    
+    <section id="rates" class="section">
+      <ExchangeRatesTable />
+    </section>
+    
+    <section class="section">
+      <About />
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .section {
+    margin: 2rem 0;
+    scroll-margin-top: 80px;
+  }
+</style>

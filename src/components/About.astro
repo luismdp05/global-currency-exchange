@@ -1,0 +1,98 @@
+---
+---
+
+<div class="about card" id="about">
+  <h2>About This Currency Exchange App</h2>
+  <p>
+    This application provides real-time currency exchange rates for major currencies around the world. 
+    The data is sourced from ExchangeRate-API, which provides up-to-date and reliable exchange rate information.
+  </p>
+  
+  <h3>Features</h3>
+  <ul>
+    <li>Convert between different currencies with real-time exchange rates</li>
+    <li>View comprehensive exchange rate tables with your preferred base currency</li>
+    <li>Simple and intuitive interface for quick currency conversions</li>
+    <li>Support for major global currencies</li>
+  </ul>
+  
+  <h3>How It Works</h3>
+  <p>
+    The application fetches the latest exchange rates from a reliable API and performs calculations to convert between currencies.
+    Exchange rates are typically updated daily, and the last update time is displayed with the conversion results.
+  </p>
+  
+  <h3>Supported Currencies</h3>
+  <div class="currencies-grid">
+    <div class="currency-item">USD - US Dollar</div>
+    <div class="currency-item">EUR - Euro</div>
+    <div class="currency-item">GBP - British Pound</div>
+    <div class="currency-item">JPY - Japanese Yen</div>
+    <div class="currency-item">CAD - Canadian Dollar</div>
+    <div class="currency-item">AUD - Australian Dollar</div>
+    <div class="currency-item">CHF - Swiss Franc</div>
+    <div class="currency-item">CNY - Chinese Yuan</div>
+    <div class="currency-item">INR - Indian Rupee</div>
+    <div class="currency-item">MXN - Mexican Peso</div>
+    <div class="currency-item">BRL - Brazilian Real</div>
+    <div class="currency-item">RUB - Russian Ruble</div>
+    <div class="currency-item">KRW - South Korean Won</div>
+    <div class="currency-item">SGD - Singapore Dollar</div>
+    <div class="currency-item">NZD - New Zealand Dollar</div>
+    <div class="currency-item">HKD - Hong Kong Dollar</div>
+    <div class="currency-item">SEK - Swedish Krona</div>
+    <div class="currency-item">ZAR - South African Rand</div>
+    <div class="currency-item">AED - UAE Dirham</div>
+    <div class="currency-item">COP - Colombian Peso</div>
+    <div class="currency-item">PEN - Peruvian Nuevo Sol</div>
+    <div class="currency-item">UYU - Uruguayan Peso</div>
+    <div class="currency-item">CUP - Cuban Peso</div>
+</div>
+</div>
+
+<style>
+  .about {
+    margin-top: 2rem;
+  }
+  
+  h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    color: var(--secondary-color);
+    margin: 1.5rem 0 0.75rem;
+  }
+  
+  p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  
+  .currencies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  
+  .currency-item {
+    background-color: rgba(50, 69, 255, 0.05);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+</style>

@@ -1,0 +1,69 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-info">
+        <p>&copy; {currentYear} Global Currency Exchange. All rights reserved.</p>
+        <p class="disclaimer">Disclaimer: Exchange rates are provided for informational purposes only and may not be accurate for trading purposes.</p>
+      </div>
+    </div>
+    <div class="data-source">
+      <p>Data provided by <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: #f1f1f1;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Alinea verticalmente */
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .footer-info {
+    text-align: center; /* Centra el texto dentro del footer-info */
+    max-width: 500px; /* Opcional: Limita el ancho para mejorar la legibilidad */
+  }
+
+  .footer-info p {
+    margin: 0.5rem 0;
+    color: #666;
+    text-align: center; /* Asegura que cada párrafo esté centrado */
+  }
+
+  .disclaimer {
+    font-size: 0.8rem;
+  }
+
+  .data-source {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: #888;
+  }
+
+  .data-source a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+  }
+</style>

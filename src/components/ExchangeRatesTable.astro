@@ -1,0 +1,226 @@
+---
+
+---
+
+<div class="exchange-rates card">
+  <h2>Exchange Rates Table</h2>
+  <div class="base-currency-selector">
+    <label for="base-currency">Base Currency:</label>
+    <select id="base-currency"></select>
+    <button id="update-table-btn" class="btn">Update Table</button>
+  </div>
+  <div class="table-container">
+    <table id="rates-table">
+      <thead>
+        <tr>
+          <th>Currency</th>
+          <th>Code</th>
+          <th>Exchange Rate</th>
+          <th>Inverse Rate</th>
+        </tr>
+      </thead>
+      <tbody id="rates-table-body">
+        <tr>
+          <td colspan="4" class="loading">Loading exchange rates...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // API URL for exchange rates
+  const API_URL = "https://open.er-api.com/v6/latest/";
+
+  // DOM Elements
+  const baseCurrencySelect = document.getElementById("base-currency");
+  const updateTableBtn = document.getElementById("update-table-btn");
+  const ratesTableBody = document.getElementById("rates-table-body");
+
+  // Currency data
+  let currencies = {};
+  let rates = {};
+
+  // Initialize the table
+  async function initialize() {
+    try {
+      // Fetch exchange rates with USD as base
+      const response = await fetch(`${API_URL}USD`);
+      const data = await response.json();
+
+      if (data.result === "success") {
+        rates = data.rates;
+        currencies = {
+          USD: "US Dollar",
+          EUR: "Euro",
+          GBP: "British Pound",
+          JPY: "Japanese Yen",
+          CAD: "Canadian Dollar",
+          AUD: "Australian Dollar",
+          CHF: "Swiss Franc",
+          CNY: "Chinese Yuan",
+          INR: "Indian Rupee",
+          MXN: "Mexican Peso",
+          BRL: "Brazilian Real",
+          RUB: "Russian Ruble",
+          KRW: "South Korean Won",
+          SGD: "Singapore Dollar",
+          NZD: "New Zealand Dollar",
+          HKD: "Hong Kong Dollar",
+          SEK: "Swedish Krona",
+          ZAR: "South African Rand",
+          AED: "UAE Dirham",
+          COP: "Colombian Peso",
+          PEN: "Peruvian Nuevo Sol",
+          UYU: "Uruguayan Peso",
+          CUP: "Cuban Peso",
+        };
+
+        // Populate base currency dropdown
+        populateBaseCurrencyDropdown();
+
+        // Set default base currency
+        baseCurrencySelect.value = "USD";
+
+        // Generate initial table
+        updateRatesTable("USD");
+      } else {
+        throw new Error("Failed to fetch exchange rates");
+      }
+    } catch (error) {
+      console.error("Error initializing table:", error);
+      ratesTableBody.innerHTML = `<tr><td colspan="4" class="error">Failed to load exchange rates. Please try again later.</td></tr>`;
+    }
+  }
+
+  // Populate base currency dropdown
+  function populateBaseCurrencyDropdown() {
+    for (const [code, name] of Object.entries(currencies)) {
+      const option = document.createElement("option");
+      option.value = code;
+      option.textContent = `${code} - ${name}`;
+      baseCurrencySelect.appendChild(option);
+    }
+  }
+
+  // Update rates table with selected base currency
+  async function updateRatesTable(baseCurrency) {
+    try {
+      ratesTableBody.innerHTML = `<tr><td colspan="4" class="loading">Loading exchange rates...</td></tr>`;
+
+      // Fetch exchange rates with selected base currency
+      const response = await fetch(`${API_URL}${baseCurrency}`);
+      const data = await response.json();
+
+      if (data.result === "success") {
+        const newRates = data.rates;
+
+        // Clear table
+        ratesTableBody.innerHTML = "";
+
+        // Add rows for each currency
+        for (const [code, name] of Object.entries(currencies)) {
+          if (code !== baseCurrency) {
+            const row = document.createElement("tr");
+
+            const exchangeRate = newRates[code];
+            const inverseRate = 1 / exchangeRate;
+
+            row.innerHTML = `
+              <td>${name}</td>
+              <td>${code}</td>
+              <td>${exchangeRate.toFixed(6)}</td>
+              <td>${inverseRate.toFixed(6)}</td>
+            `;
+
+            ratesTableBody.appendChild(row);
+          }
+        }
+      } else {
+        throw new Error("Failed to fetch exchange rates");
+      }
+    } catch (error) {
+      console.error("Error updating rates table:", error);
+      ratesTableBody.innerHTML = `<tr><td colspan="4" class="error">Failed to update exchange rates. Please try again later.</td></tr>`;
+    }
+  }
+
+  // Event listeners
+  updateTableBtn.addEventListener("click", () => {
+    const selectedBaseCurrency = baseCurrencySelect.value;
+    updateRatesTable(selectedBaseCurrency);
+  });
+
+  // Initialize table
+  initialize();
+</script>
+
+<style>
+  .exchange-rates {
+    overflow: hidden;
+  }
+
+  h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .base-currency-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .base-currency-selector label {
+    font-weight: 500;
+    margin-right: 0.5rem;
+  }
+
+  .base-currency-selector select {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 0;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+
+  th,
+  td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th {
+    background-color: rgba(50, 69, 255, 0.05);
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+  }
+
+  tr:hover td {
+    background-color: rgba(50, 69, 255, 0.03);
+  }
+
+  .loading,
+  .error {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .error {
+    color: #e53935;
+  }
+</style>
