@@ -7,10 +7,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "start": "serve dist -l tcp://0.0.0.0:8080"
   },
   "dependencies": {
     "astro": "^5.2.5",
-    "axios": "^1.6.7"
+    "axios": "^1.6.7",
+    "serve": "^14.2.4"
   }
 }
