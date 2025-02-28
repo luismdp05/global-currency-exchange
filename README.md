@@ -183,5 +183,3 @@ All commands are run from the root of the project, from a terminal:
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
 ---
-
-Este archivo está ahora bien organizado, con una estructura clara y fácil de seguir. Si necesitas más ajustes o personalización, no dudes en decírmelo. 😊
